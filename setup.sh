@@ -2,7 +2,7 @@
 # Bootstrap: clone share_fir and make datashare.sh executable
 
 REPO="https://github.com/eartigau/share_fir.git"
-DEST="share_fir"
+DEST="/home/eartigau/bin/"
 
 if [[ -d "$DEST" ]]; then
     echo "Directory '$DEST' already exists, skipping clone."
