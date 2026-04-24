@@ -99,8 +99,11 @@ echo "Setting permissions..."
 # Set directory permissions: rwx for owner, rx for group, nothing for others
 #find "$USERDIR" -type d -exec chmod 750 {} \;
 
-setfacl -m u:"$INPUT_USER":rx  "$BASEDIR/"
-setfacl -R -m u:"$INPUT_USER":rx  "$USERDIR/"
+# Allow traversal of the base datashare dir
+setfacl -m u:"$INPUT_USER":rx "$BASEDIR/"
+# Directories need rx to enter; files need only r
+find "$USERDIR" -type d -exec setfacl -m u:"$INPUT_USER":rx {} \;
+find "$USERDIR" -type f -exec setfacl -m u:"$INPUT_USER":r  {} \;
 
 
 # Set file permissions: rw for owner, r for group, nothing for others
